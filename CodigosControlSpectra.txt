@@ -1,0 +1,52 @@
+//Codigo de envio para Encender/Apagar
+14:50:19.235 -> uint16_t address = 0xB7;
+14:50:19.235 -> uint16_t command = 0xFD;
+14:50:19.235 -> uint32_t rawData = 0x2FD48B7;
+
+//Codigo recibido para Encender/Apagar
+14:56:47.254 -> uint16_t address = 0x40;
+14:56:47.254 -> uint16_t command = 0x12;
+14:56:47.254 -> uint32_t rawData = 0xED12BF40;
+
+//Codigo de envio para subir volumen
+10:34:17.560 -> uint16_t address = 0xA7;
+10:34:17.560 -> uint16_t command = 0xFD;
+10:34:17.560 -> uint32_t rawData = 0x2FD58A7;
+
+
+//Codigo recibido para  subir volumen
+10:30:08.118 -> uint16_t address = 0x40;
+10:30:08.118 -> uint16_t command = 0x1A;
+10:30:08.118 -> uint32_t rawData = 0xE51ABF40;
+
+
+//Codigo de envio para bajar volumen
+10:34:44.863 -> uint16_t address = 0x87;
+10:34:44.863 -> uint16_t command = 0xFD;
+10:34:44.863 -> uint32_t rawData = 0x2FD7887;
+
+
+//Codigo recibido para bajar volumen
+10:30:41.898 -> uint16_t address = 0x40;
+10:30:41.898 -> uint16_t command = 0x1E;
+10:30:41.898 -> uint32_t rawData = 0xE11EBF40;
+
+//Codigo de envio para subir canal
+10:35:08.413 -> uint16_t address = 0x27;
+10:35:08.413 -> uint16_t command = 0xFD;
+10:35:08.413 -> uint32_t rawData = 0x2FDD827;
+
+//Codigo recibido para  subir canal
+10:31:15.172 -> uint16_t address = 0x40;
+10:31:15.172 -> uint16_t command = 0x1B;
+10:31:15.172 -> uint32_t rawData = 0xE41BBF40;
+
+//Codigo de envio para bajar canal
+10:35:35.985 -> uint16_t address = 0x7;
+10:35:35.985 -> uint16_t command = 0xFD;
+10:35:35.985 -> uint32_t rawData = 0x2FDF807;
+
+//Codigo recibido para bajar canal
+10:31:43.594 -> uint16_t address = 0x40;
+10:31:43.594 -> uint16_t command = 0x1F;
+10:31:43.594 -> uint32_t rawData = 0xE01FBF40;

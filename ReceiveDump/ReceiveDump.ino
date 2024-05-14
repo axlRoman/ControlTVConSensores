@@ -76,10 +76,11 @@ IRsend irsend(IR_LED_PIN);
 //unsigned long channelDownCode = 0xE0E008F7; // Código IR para bajar canal
 
 unsigned long powerCode = 0x2FD48B7; // Código IR para encender/apagar
-unsigned long volumeUpCode = 0xF30C7D02; // Código IR para subir volumen
-unsigned long volumeDownCode = 0xE6197D02; // Código IR para bajar volumen
-unsigned long channelUpCode = 0xF00F7D02; // Código IR para subir canal
-unsigned long channelDownCode = 0xA55A7D02; // Código IR para bajar canal
+
+unsigned long volumeUpCode = 0x2FD58A7; // Código IR para subir volumen
+unsigned long volumeDownCode = 0x2FD7887; // Código IR para bajar volumen
+unsigned long channelUpCode = 0x2FDD827; // Código IR para subir canal
+unsigned long channelDownCode = 0x2FDF807; // Código IR para bajar canal
 
 //+=============================================================================
 // Configure the Arduino
