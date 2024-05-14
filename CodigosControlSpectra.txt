@@ -50,3 +50,13 @@
 10:31:43.594 -> uint16_t address = 0x40;
 10:31:43.594 -> uint16_t command = 0x1F;
 10:31:43.594 -> uint32_t rawData = 0xE01FBF40;
+
+//Codigo de envio para mute
+11:13:46.560 -> uint16_t address = 0xF7;
+11:13:46.560 -> uint16_t command = 0xFD;
+11:13:46.560 -> uint32_t rawData = 0x2FD08F7;
+
+//Codigo recibido para mute
+11:12:16.121 -> uint16_t address = 0x40;
+11:12:16.121 -> uint16_t command = 0x10;
+11:12:16.121 -> uint32_t rawData = 0xEF10BF40;

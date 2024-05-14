@@ -81,6 +81,7 @@ unsigned long volumeUpCode = 0x2FD58A7; // Código IR para subir volumen
 unsigned long volumeDownCode = 0x2FD7887; // Código IR para bajar volumen
 unsigned long channelUpCode = 0x2FDD827; // Código IR para subir canal
 unsigned long channelDownCode = 0x2FDF807; // Código IR para bajar canal
+unsigned long mute = 0x2FD08F7;
 
 //+=============================================================================
 // Configure the Arduino
@@ -155,6 +156,10 @@ void loop() {
         break;
       case 'b': // Bajar canal
         irsend.sendNEC(channelDownCode, 32);
+        delay(50);
+        break;
+      case 'm': // Bajar canal
+        irsend.sendNEC(mute, 32);
         delay(50);
         break;
       default:
