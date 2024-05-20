@@ -69,19 +69,30 @@ IRsend irsend(IR_LED_PIN);
 
 // Códigos IR genéricos comunes
 //Spectra
-//unsigned long powerCode = 0xE0E040BF; // Código IR para encender/apagar
-//unsigned long volumeUpCode = 0xE0E0E01F; // Código IR para subir volumen
-//unsigned long volumeDownCode = 0xE0E0D02F; // Código IR para bajar volumen
-//unsigned long channelUpCode = 0xE0E048B7; // Código IR para subir canal
-//unsigned long channelDownCode = 0xE0E008F7; // Código IR para bajar canal
-
 unsigned long powerCode = 0x2FD48B7; // Código IR para encender/apagar
-
 unsigned long volumeUpCode = 0x2FD58A7; // Código IR para subir volumen
 unsigned long volumeDownCode = 0x2FD7887; // Código IR para bajar volumen
 unsigned long channelUpCode = 0x2FDD827; // Código IR para subir canal
 unsigned long channelDownCode = 0x2FDF807; // Código IR para bajar canal
-unsigned long mute = 0x2FD08F7;
+unsigned long muteCode = 0x2FD08F7; // Código IR para silenciar
+
+unsigned long sourceCode = 0x2FD28D7; // Código IR para home
+unsigned long upCode =0x2FD9867 ; // Código IR para arriba
+unsigned long downCode = 0x2FDB847  ; // Código IR para abajo
+unsigned long leftCode = 0x2FD629D  ; // Código IR para izquierda
+unsigned long rightCode = 0x2FDE21D  ; // Código IR para derecha
+unsigned long okCode = 0x2FD50AF  ; // Código IR para ok
+unsigned long backCode = 0x2FDFF00 ; // Código IR para regresar
+
+unsigned long playPauseCode = 0x2FDEA15 ; // Código IR para play/pause
+
+unsigned long exitCode = 0x2FD22DD  ;
+
+unsigned long netflixCode = 0x6A00; // Código IR para Netflix
+unsigned long disneyCode = 0x3A00 ; // Código IR para Disney+
+
+
+
 
 //+=============================================================================
 // Configure the Arduino
@@ -97,126 +108,92 @@ void setup() {
     delay(4000); // To be able to connect Serial monitor after reset or power up and before first print out. Do not wait for an attached Serial Monitor!
 #endif
     // Just to know which program is running on my Arduino
-    Serial.println(F("START " __FILE__ " from " __DATE__ "\r\nUsing library version " VERSION_IRREMOTE));
+    //Serial.println(F("START " __FILE__ " from " __DATE__ "\r\nUsing library version " VERSION_IRREMOTE));
 
     // Start the receiver and if not 3. parameter specified, take LED_BUILTIN pin from the internal boards definition as default feedback LED
     IrReceiver.begin(IR_RECEIVE_PIN, ENABLE_LED_FEEDBACK);
 
     Serial.print(F("Ready to receive IR signals of protocols: "));
-    printActiveIRProtocols(&Serial);
-    Serial.println(F("at pin " STR(IR_RECEIVE_PIN)));
+   // printActiveIRProtocols(&Serial);
+   // Serial.println(F("at pin " STR(IR_RECEIVE_PIN)));
 
     // infos for receive
-    Serial.print(RECORD_GAP_MICROS);
-    Serial.println(F(" us is the (minimum) gap, after which the start of a new IR packet is assumed"));
-    Serial.print(MARK_EXCESS_MICROS);
-    Serial.println();
-    Serial.println(F("Because of the verbose output (>200 ms at 115200 baud), repeats are not dumped correctly!"));
-    Serial.println();
-    Serial.println(F("If you receive protocol NEC, Samsung or LG, run also ReceiveDemo to check if your actual protocol is eventually NEC2 or SamsungLG, which is determined by the repeats"));
-    Serial.println();
+   // Serial.print(RECORD_GAP_MICROS);
+   // Serial.println(F(" us is the (minimum) gap, after which the start of a new IR packet is assumed"));
+   // Serial.print(MARK_EXCESS_MICROS);
+   // Serial.println();
+   // Serial.println(F("Because of the verbose output (>200 ms at 115200 baud), repeats are not dumped correctly!"));
+   // Serial.println();
+   // Serial.println(F("If you receive protocol NEC, Samsung or LG, run also ReceiveDemo to check if your actual protocol is eventually NEC2 or SamsungLG, which is determined by the repeats"));
+   // Serial.println();
 
 }
 
 //+=============================================================================
 // The repeating section of the code
-//
 void loop() {
-  // Escuchar el puerto serie para comandos desde la computadora
   if (Serial.available() > 0) {
     char command = Serial.read();
     switch (command) {
-      case 'p': // Encender/apagar
+      case 'p':
         irsend.sendNEC(powerCode, 32);
-
-        digitalWrite(ledPin, HIGH); // Enciende el LED IR
-        delay(1000); // Espera 1 segundo
-        digitalWrite(ledPin, LOW); // Apaga el LED IR
-        delay(1000); // Espera 1 segundo
-
-        delay(50);
         break;
-      case 'u': // Subir volumen
+      case 'u':
         irsend.sendNEC(volumeUpCode, 32);
-
-        digitalWrite(ledPin, HIGH); // Enciende el LED IR
-        delay(1000); // Espera 1 segundo
-        digitalWrite(ledPin, LOW); // Apaga el LED IR
-        delay(1000); // Espera 1 segundo
-
-        delay(50);
         break;
-      case 'd': // Bajar volumen
+      case 'd':
         irsend.sendNEC(volumeDownCode, 32);
-        delay(50);
         break;
-      case 'c': // Subir canal
-        irsend.sendNEC(channelUpCode, 32);
-        delay(50);
+      case 'm':
+        irsend.sendNEC(muteCode, 32);
         break;
-      case 'b': // Bajar canal
-        irsend.sendNEC(channelDownCode, 32);
-        delay(50);
+      case 'h':
+        irsend.sendNEC(sourceCode, 32);
         break;
-      case 'm': // Bajar canal
-        irsend.sendNEC(mute, 32);
-        delay(50);
+      case 'U':
+        irsend.sendNEC(upCode, 32);
+        break;
+      case 'D':
+        irsend.sendNEC(downCode, 32);
+        break;
+      case 'L':
+        irsend.sendNEC(leftCode, 32);
+        break;
+      case 'R':
+        irsend.sendNEC(rightCode, 32);
+        break;
+      case 'O':
+        irsend.sendNEC(okCode, 32);
+        break;
+      case 'b':
+        irsend.sendNEC(backCode, 32);
+        break;
+      case 'P':
+        irsend.sendNEC(playPauseCode, 32);
+        break;
+      case 'n':
+        irsend.sendNEC(netflixCode, 32);
+        break;
+      case 'i':
+        irsend.sendNEC(disneyCode, 32);
+        break;
+      case 'e':
+        irsend.sendNEC(exitCode, 32);
         break;
       default:
         break;
     }
+    digitalWrite(LED_BUILTIN, HIGH);
+    delay(1000);
+    digitalWrite(LED_BUILTIN, LOW);
+    delay(1000);
   }
-    if (IrReceiver.decode()) {  // Grab an IR code
-        // At 115200 baud, printing takes 200 ms for NEC protocol and 70 ms for NEC repeat
-        Serial.println(); // blank line between entries
-        Serial.println(); // 2 blank lines between entries
-        IrReceiver.printIRResultShort(&Serial);
-        // Check if the buffer overflowed
-        if (IrReceiver.decodedIRData.flags & IRDATA_FLAGS_WAS_OVERFLOW) {
-            Serial.println(F("Try to increase the \"RAW_BUFFER_LENGTH\" value of " STR(RAW_BUFFER_LENGTH) " in " __FILE__));
-            // see also https://github.com/Arduino-IRremote/Arduino-IRremote#compile-options--macros-for-this-library
-        } else {
-            if (IrReceiver.decodedIRData.protocol == UNKNOWN) {
-                Serial.println(F("Received noise or an unknown (or not yet enabled) protocol"));
-            }
-            Serial.println();
-            IrReceiver.printIRSendUsage(&Serial);
-            Serial.println();
-            Serial.println(F("Raw result in internal ticks (50 us) - with leading gap"));
-            IrReceiver.printIRResultRawFormatted(&Serial, false); // Output the results in RAW format
-            Serial.println(F("Raw result in microseconds - with leading gap"));
-            IrReceiver.printIRResultRawFormatted(&Serial, true);  // Output the results in RAW format
-            Serial.println();                               // blank line between entries
-            Serial.print(F("Result as internal 8bit ticks (50 us) array - compensated with MARK_EXCESS_MICROS="));
-            Serial.println(MARK_EXCESS_MICROS);
-            IrReceiver.compensateAndPrintIRResultAsCArray(&Serial, false); // Output the results as uint8_t source code array of ticks
-            Serial.print(F("Result as microseconds array - compensated with MARK_EXCESS_MICROS="));
-            Serial.println(MARK_EXCESS_MICROS);
-            IrReceiver.compensateAndPrintIRResultAsCArray(&Serial, true); // Output the results as uint16_t source code array of micros
-            IrReceiver.printIRResultAsCVariables(&Serial);  // Output address and data as source code variables
-            Serial.println();                               // blank line between entries
 
-            IrReceiver.compensateAndPrintIRResultAsPronto(&Serial);
+  if (IrReceiver.decode()) {
+    Serial.println();
+    IrReceiver.printIRResultShort(&Serial);
+    Serial.println();
+    IrReceiver.resume();
+  }
 
-            /*
-             * Example for using the compensateAndStorePronto() function.
-             * Creating this String requires 2210 bytes program memory and 10 bytes RAM for the String class.
-             * The String object itself requires additional 440 bytes RAM from the heap.
-             * This values are for an Arduino Uno.
-             */
-//        Serial.println();                                     // blank line between entries
-//        String ProntoHEX = F("Pronto HEX contains: ");        // Assign string to ProtoHex string object
-//        if (int size = IrReceiver.compensateAndStorePronto(&ProntoHEX)) {   // Dump the content of the IReceiver Pronto HEX to the String object
-//            // Append compensateAndStorePronto() size information to the String object (requires 50 bytes heap)
-//            ProntoHEX += F("\r\nProntoHEX is ");              // Add codes size information to the String object
-//            ProntoHEX += size;
-//            ProntoHEX += F(" characters long and contains "); // Add codes count information to the String object
-//            ProntoHEX += size / 5;
-//            ProntoHEX += F(" codes");
-//            Serial.println(ProntoHEX.c_str());                // Print to the serial console the whole String object
-//            Serial.println();                                 // blank line between entries
-//        }
-        }
-        IrReceiver.resume();                            // Prepare for the next IR frame
-    }
 }

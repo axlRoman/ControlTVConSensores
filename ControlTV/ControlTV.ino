@@ -19,6 +19,7 @@ const int echoPin = 10; // Pin del echo para el sensor ultrasónico
 
 IRsend irsend(IR_LED_PIN);
 
+//Spectra
 unsigned long powerCode = 0x2FD48B7; // Código IR para encender/apagar
 unsigned long volumeUpCode = 0x2FD58A7; // Código IR para subir volumen
 unsigned long volumeDownCode = 0x2FD7887; // Código IR para bajar volumen
@@ -26,6 +27,31 @@ unsigned long channelUpCode = 0x2FDD827; // Código IR para subir canal
 unsigned long channelDownCode = 0x2FDF807; // Código IR para bajar canal
 unsigned long muteCode = 0x2FD08F7; // Código IR para silenciar
 
+unsigned long sourceCode = 0x2FD28D7; // Código IR para home
+unsigned long upCode =0x2FD9867 ; // Código IR para arriba
+unsigned long downCode = 0x2FDB847  ; // Código IR para abajo
+unsigned long leftCode = 0x2FD629D  ; // Código IR para izquierda
+unsigned long rightCode = 0x2FDE21D  ; // Código IR para derecha
+unsigned long okCode = 0x2FD50AF  ; // Código IR para ok
+unsigned long backCode = 0x2FDFF00 ; // Código IR para regresar
+
+unsigned long playPauseCode = 0x2FDEA15 ; // Código IR para play/pause
+
+unsigned long exitCode = 0x2FD22DD  ;
+
+unsigned long netflixCode = 0x6A00; // Código IR para Netflix
+unsigned long disneyCode = 0x3A00 ; // Código IR para Disney+
+
+
+/*
+unsigned long powerCode = 0x20DF10EF;
+
+unsigned long volumeUpCode = 0x20DF40BF; // Código IR para subir volumen
+unsigned long volumeDownCode = 0x20DFC03F; // Código IR para bajar volumen
+unsigned long channelUpCode = 0x20DF00FF; // Código IR para subir canal
+unsigned long channelDownCode = 0x20DF807F; // Código IR para bajar canal
+unsigned long muteCode = 0x20DF906F; // Código IR para silenciar
+*/
 void interruptRoutine() {
   isr_flag = 1;
 }
