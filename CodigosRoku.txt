@@ -1,1 +1,34 @@
-Codigos para 
+Codigos para Control de dispositivo ROKU ESPRESS 4K
+--Codigo de ecendido
+0x8
+0x1000
+
+--Codigo de subir volumen
+0x2 
+
+--Codigo de bajar volumen
+0x3
+
+--Codigo de mute
+0x9
+
+--Codigo de subir
+0x40 
+--Codigo de bajar
+0x41
+--Codigo de iaquierda
+0x7
+--Codigo de derecha
+0x6
+--Codigo de ok
+0x44
+--Codigo de play/pause
+0xB0 0xBA
+--Codigo de home
+0x7C
+--Codigo de Netflix
+0x56
+--Codigo de Prime
+0x5C
+--Codigo de regresar
+0x28

@@ -12,8 +12,23 @@ SparkFun_APDS9960 apds = SparkFun_APDS9960();
 int isr_flag = 0;
 
 #define IR_LED_PIN 3
-const int pinIRSensor = 4;
-const int ledPin = 13; // Define el pin al que está conectado el LED IR
+const int power = 4;
+
+const int channelUp = 5;
+const int channelDown = 6;
+
+const int up = 8;
+const int down = 7;
+
+const int source = 12;
+const int ok = 11;
+
+const int rigth = 15;
+const int left = 0;
+
+const int play = 17;
+
+const int mute = 13; // Define el pin al que está conectado el LED IR
 const int trigPin = 9; // Pin del trig para el sensor ultrasónico
 const int echoPin = 10; // Pin del echo para el sensor ultrasónico
 
@@ -42,101 +57,112 @@ unsigned long exitCode = 0x2FD22DD  ;
 unsigned long netflixCode = 0x6A00; // Código IR para Netflix
 unsigned long disneyCode = 0x3A00 ; // Código IR para Disney+
 
-
-/*
-unsigned long powerCode = 0x20DF10EF;
-
-unsigned long volumeUpCode = 0x20DF40BF; // Código IR para subir volumen
-unsigned long volumeDownCode = 0x20DFC03F; // Código IR para bajar volumen
-unsigned long channelUpCode = 0x20DF00FF; // Código IR para subir canal
-unsigned long channelDownCode = 0x20DF807F; // Código IR para bajar canal
-unsigned long muteCode = 0x20DF906F; // Código IR para silenciar
-*/
 void interruptRoutine() {
   isr_flag = 1;
 }
 
 void setup() {
   Serial.begin(115200); // Inicializar el puerto serie
-  pinMode(ledPin, OUTPUT); // Configura el pin como salida
+//  pinMode(ledPin, OUTPUT); // Configura el pin como salida
   pinMode(trigPin, OUTPUT); // Configura el pin del trig como salida
   pinMode(echoPin, INPUT); // Configura el pin del echo como entrada
 
-  // Set interrupt pin as input
-  pinMode(APDS9960_INT, INPUT);
-  // Initialize interrupt service routine
-  attachInterrupt(0, interruptRoutine, FALLING);
+  pinMode(power, INPUT_PULLUP); // Configura el pin channelUp con resistencia pull-up
 
-  // Initialize APDS-9960 (configure I2C and initial values)
-  if ( apds.init() ) {
-    Serial.println(F("APDS-9960 initialization complete"));
-  } else {
-    Serial.println(F("Something went wrong during APDS-9960 init!"));
-  }
-  
-  // Start running the APDS-9960 gesture sensor engine
-  if ( apds.enableGestureSensor(true) ) {
-    Serial.println(F("Gesture sensor is now running"));
-  } else {
-    Serial.println(F("Something went wrong during gesture sensor init!"));
-  }
-}
+  pinMode(channelUp, INPUT_PULLUP); // Configura el pin channelUp con resistencia pull-up
+  pinMode(channelDown, INPUT_PULLUP); // Configura el pin channelDown con resistencia pull-up
 
+  pinMode(source, INPUT_PULLUP); // Configura el pin channelUp con resistencia pull-up
+  pinMode(ok, INPUT_PULLUP); // Configura el pin channelDown con resistencia pull-up
 
-void handleGesture() {
-    if ( apds.isGestureAvailable() ) {
-    switch ( apds.readGesture() ) {
-      case DIR_UP:
-        Serial.println("UP");
-        break;
-      case DIR_DOWN:
-        Serial.println("DOWN");
-        break;
-      case DIR_LEFT:
-      irsend.sendNEC(channelDownCode, 32);
-        Serial.println("LEFT");
-        break;
-      case DIR_RIGHT:
-      irsend.sendNEC(channelUpCode, 32);
-        Serial.println("RIGHT");
-        break;
-      case DIR_NEAR:
-        Serial.println("NEAR");
-        break;
-      case DIR_FAR:
-        Serial.println("FAR");
-        break;
-      default:
-        Serial.println("NONE");
-    }
-  }
+  pinMode(up, INPUT_PULLUP); // Configura el pin channelUp con resistencia pull-up
+  pinMode(down, INPUT_PULLUP); // Configura el pin channelDown con resistencia pull-up
+
+  pinMode(rigth, INPUT_PULLUP); // Configura el pin channelUp con resistencia pull-up
+  pinMode(left, INPUT_PULLUP); // Configura el pin channelDown con resistencia pull-up
+
+  pinMode(ok, INPUT_PULLUP); // Configura el pin channelUp con resistencia pull-up
+  pinMode(play, INPUT_PULLUP); // Configura el pin channelDown con resistencia pull-up
+
+ // pinMode(up, INPUT_PULLUP); // Configura el pin channelUp con resistencia pull-up
+ // pinMode(down, INPUT_PULLUP); // Configura el pin channelDown con resistencia pull-up
 }
 
 bool encendido = false;
+bool channel = false;
 void loop() {
-  if( isr_flag == 1 ) {
-    detachInterrupt(0);
-    handleGesture();
-    isr_flag = 0;
-    attachInterrupt(0, interruptRoutine, FALLING);
-  }
 
-  
-  int sensorValue = digitalRead(pinIRSensor);
-  if(sensorValue == HIGH && !encendido){
+  int sensorPower = digitalRead(power);
+  if(sensorPower == HIGH && !encendido){
     irsend.sendNEC(powerCode, 32);
-
-    digitalWrite(ledPin, HIGH); // Enciende el LED IR
-    delay(1000); // Espera 1 segundo
-    digitalWrite(ledPin, LOW); // Apaga el LED IR
-    delay(1000); // Espera 1 segundo
-
-    delay(50);
+    //delay(50);
     encendido = true;
   }
 
+
+  int sensorChannelUp = digitalRead(channelUp);
+  if(sensorChannelUp == LOW){
+    irsend.sendNEC(channelUpCode, 32);
+    delay(50);
+  }
+
+  int sensorChannelDown = digitalRead(channelDown);
+  if(sensorChannelDown == LOW){
+    irsend.sendNEC(channelDownCode, 32);
+    delay(50);
+  }
+
+  int sensorSource = digitalRead(source);
+  if(sensorSource == LOW){
+    irsend.sendNEC(sourceCode, 32);
+    delay(50);
+  }
+  int sensorOk = digitalRead(ok);
+  if(sensorOk == LOW){
+    irsend.sendNEC(okCode, 32);
+    delay(50);
+  }
+
+
+  int sensorUp = digitalRead(up);
+  if(sensorUp == LOW){
+    irsend.sendNEC(upCode, 32);
+    delay(50);
+  }
+
+  int sensorDown = digitalRead(down);
+  if(sensorDown == LOW){
+    irsend.sendNEC(downCode, 32);
+    delay(50);
+  }
+  int sensorRigth = digitalRead(rigth);
+  if(sensorRigth == LOW){
+    irsend.sendNEC(rightCode, 32);
+    delay(50);
+  }
+
+  int sensorleft = digitalRead(left);
+  if(sensorleft == LOW){
+    irsend.sendNEC(leftCode, 32);
+    delay(50);
+  }
+
+  int sensorPlay = digitalRead(play);
+  if(sensorPlay == LOW){
+    irsend.sendNEC(playPauseCode, 32);
+    delay(50);
+  }
+
+  int sensorMute = digitalRead(mute);
+  if(sensorMute == LOW){
+    irsend.sendNEC(muteCode, 32);
+    delay(50);
+  }
+
+  
+
   // Si el sensor vuelve a LOW, se restablece la variable encendido
-  if(sensorValue == LOW){
+  if(sensorPower == LOW){
     encendido = false;
   }
   
@@ -162,38 +188,5 @@ void loop() {
   else if (distance > 15 && distance < 20) {
     irsend.sendNEC(volumeUpCode, 32);
     //delay(50);
-  }
-
-  // Escuchar el puerto serie para comandos desde la computadora
-  if (Serial.available() > 0) {
-    char command = Serial.read();
-    switch (command) {
-      case 'p': // Encender/apagar
-        irsend.sendNEC(powerCode, 32);
-        delay(50);
-        break;
-      case 'u': // Subir volumen
-        irsend.sendNEC(volumeUpCode, 32);
-        delay(50);
-        break;
-      case 'd': // Bajar volumen
-        irsend.sendNEC(volumeDownCode, 32);
-        delay(50);
-        break;
-      case 'c': // Subir canal
-        irsend.sendNEC(channelUpCode, 32);
-        delay(50);
-        break;
-      case 'b': // Bajar canal
-        irsend.sendNEC(channelDownCode, 32);
-        delay(50);
-        break;
-      case 'm': // Silenciar
-        irsend.sendNEC(muteCode, 32);
-        delay(50);
-        break;
-      default:
-        break;
-    }
   }
 }
