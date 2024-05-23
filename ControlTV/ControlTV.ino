@@ -12,6 +12,7 @@ SparkFun_APDS9960 apds = SparkFun_APDS9960();
 int isr_flag = 0;
 
 #define IR_LED_PIN 3
+#define LED_PIN 2
 const int power = 4;
 
 const int channelUp = 5;
@@ -27,6 +28,8 @@ const int rigth = 15;
 const int left = 0;
 
 const int play = 17;
+
+const int ret = 19;
 
 const int mute = 13; // Define el pin al que está conectado el LED IR
 const int trigPin = 9; // Pin del trig para el sensor ultrasónico
@@ -66,26 +69,32 @@ void setup() {
 //  pinMode(ledPin, OUTPUT); // Configura el pin como salida
   pinMode(trigPin, OUTPUT); // Configura el pin del trig como salida
   pinMode(echoPin, INPUT); // Configura el pin del echo como entrada
-
-  pinMode(power, INPUT_PULLUP); // Configura el pin channelUp con resistencia pull-up
+  pinMode(LED_PIN,OUTPUT);
+  pinMode(power, INPUT_PULLUP); // Configura el pin power con resistencia pull-up
 
   pinMode(channelUp, INPUT_PULLUP); // Configura el pin channelUp con resistencia pull-up
   pinMode(channelDown, INPUT_PULLUP); // Configura el pin channelDown con resistencia pull-up
 
-  pinMode(source, INPUT_PULLUP); // Configura el pin channelUp con resistencia pull-up
-  pinMode(ok, INPUT_PULLUP); // Configura el pin channelDown con resistencia pull-up
+  pinMode(source, INPUT_PULLUP); // Configura el pin source con resistencia pull-up
+  pinMode(ok, INPUT_PULLUP); // Configura el pin ok con resistencia pull-up
 
-  pinMode(up, INPUT_PULLUP); // Configura el pin channelUp con resistencia pull-up
-  pinMode(down, INPUT_PULLUP); // Configura el pin channelDown con resistencia pull-up
+  pinMode(up, INPUT_PULLUP); // Configura el pin up con resistencia pull-up
+  pinMode(down, INPUT_PULLUP); // Configura el pin down con resistencia pull-up
 
-  pinMode(rigth, INPUT_PULLUP); // Configura el pin channelUp con resistencia pull-up
-  pinMode(left, INPUT_PULLUP); // Configura el pin channelDown con resistencia pull-up
+  pinMode(rigth, INPUT_PULLUP); // Configura el pin right con resistencia pull-up
+  pinMode(left, INPUT_PULLUP); // Configura el pin left con resistencia pull-up
 
-  pinMode(ok, INPUT_PULLUP); // Configura el pin channelUp con resistencia pull-up
-  pinMode(play, INPUT_PULLUP); // Configura el pin channelDown con resistencia pull-up
+  pinMode(ret, INPUT_PULLUP); // Configura el pin return con resistencia pull-up
+  pinMode(play, INPUT_PULLUP); // Configura el pin play con resistencia pull-up
 
- // pinMode(up, INPUT_PULLUP); // Configura el pin channelUp con resistencia pull-up
- // pinMode(down, INPUT_PULLUP); // Configura el pin channelDown con resistencia pull-up
+ // pinMode(up, INPUT_PULLUP); // Configura el pin up con resistencia pull-up
+ // pinMode(down, INPUT_PULLUP); // Configura el pin down con resistencia pull-up
+}
+
+void encender(){
+  digitalWrite(LED_PIN,HIGH);
+  delay(500);
+  digitalWrite(LED_PIN,LOW);
 }
 
 bool encendido = false;
@@ -97,6 +106,7 @@ void loop() {
     irsend.sendNEC(powerCode, 32);
     //delay(50);
     encendido = true;
+    encender();
   }
 
 
@@ -104,23 +114,27 @@ void loop() {
   if(sensorChannelUp == LOW){
     irsend.sendNEC(channelUpCode, 32);
     delay(50);
+    encender();
   }
 
   int sensorChannelDown = digitalRead(channelDown);
   if(sensorChannelDown == LOW){
     irsend.sendNEC(channelDownCode, 32);
     delay(50);
+    encender();
   }
 
   int sensorSource = digitalRead(source);
   if(sensorSource == LOW){
     irsend.sendNEC(sourceCode, 32);
     delay(50);
+    encender();
   }
   int sensorOk = digitalRead(ok);
   if(sensorOk == LOW){
     irsend.sendNEC(okCode, 32);
     delay(50);
+    encender();
   }
 
 
@@ -134,32 +148,42 @@ void loop() {
   if(sensorDown == LOW){
     irsend.sendNEC(downCode, 32);
     delay(50);
+    encender();
   }
   int sensorRigth = digitalRead(rigth);
   if(sensorRigth == LOW){
     irsend.sendNEC(rightCode, 32);
     delay(50);
+    encender();
   }
 
   int sensorleft = digitalRead(left);
   if(sensorleft == LOW){
     irsend.sendNEC(leftCode, 32);
     delay(50);
+    encender();
   }
 
   int sensorPlay = digitalRead(play);
   if(sensorPlay == LOW){
     irsend.sendNEC(playPauseCode, 32);
     delay(50);
+    encender();
   }
 
   int sensorMute = digitalRead(mute);
   if(sensorMute == LOW){
     irsend.sendNEC(muteCode, 32);
     delay(50);
+    encender();
   }
 
-  
+  int sensorReturn = digitalRead(ret);
+  if(sensorReturn == LOW){
+    irsend.sendNEC(backCode, 32);
+    delay(50);
+    encender();
+  }
 
   // Si el sensor vuelve a LOW, se restablece la variable encendido
   if(sensorPower == LOW){
@@ -180,13 +204,19 @@ void loop() {
   distance = duration * 0.034 / 2;
 
   // Si la distancia es menor o igual a 10 cm, baja el volumen
-  if (distance <= 10 && distance >= 5) {
+  if (distance <= 13 && distance >= 2) {
     irsend.sendNEC(volumeDownCode, 32);
-    //delay(50);
+    digitalWrite(LED_PIN,HIGH);
+    //delay(10);
   }
   // Si la distancia es mayor a 15 pero menor a 20 cm, sube el volumen
-  else if (distance > 15 && distance < 20) {
+  else if (distance > 18 && distance < 35) {
     irsend.sendNEC(volumeUpCode, 32);
-    //delay(50);
+    digitalWrite(LED_PIN,HIGH);
+    //delay(10);
   }
-}
+  else{
+  digitalWrite(LED_PIN,LOW);
+  }
+  delay(50);
+} 
