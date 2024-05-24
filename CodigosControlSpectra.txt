@@ -1,62 +1,19 @@
-//Codigo de envio para Encender/Apagar
-14:50:19.235 -> uint16_t address = 0xB7;
-14:50:19.235 -> uint16_t command = 0xFD;
-14:50:19.235 -> uint32_t rawData = 0x2FD48B7;
-
-//Codigo recibido para Encender/Apagar
-14:56:47.254 -> uint16_t address = 0x40;
-14:56:47.254 -> uint16_t command = 0x12;
-14:56:47.254 -> uint32_t rawData = 0xED12BF40;
-
-//Codigo de envio para subir volumen
-10:34:17.560 -> uint16_t address = 0xA7;
-10:34:17.560 -> uint16_t command = 0xFD;
-10:34:17.560 -> uint32_t rawData = 0x2FD58A7;
-
-
-//Codigo recibido para  subir volumen
-10:30:08.118 -> uint16_t address = 0x40;
-10:30:08.118 -> uint16_t command = 0x1A;
-10:30:08.118 -> uint32_t rawData = 0xE51ABF40;
-
-
-//Codigo de envio para bajar volumen
-10:34:44.863 -> uint16_t address = 0x87;
-10:34:44.863 -> uint16_t command = 0xFD;
-10:34:44.863 -> uint32_t rawData = 0x2FD7887;
-
-
-//Codigo recibido para bajar volumen
-10:30:41.898 -> uint16_t address = 0x40;
-10:30:41.898 -> uint16_t command = 0x1E;
-10:30:41.898 -> uint32_t rawData = 0xE11EBF40;
-
-//Codigo de envio para subir canal
-10:35:08.413 -> uint16_t address = 0x27;
-10:35:08.413 -> uint16_t command = 0xFD;
-10:35:08.413 -> uint32_t rawData = 0x2FDD827;
-
-//Codigo recibido para  subir canal
-10:31:15.172 -> uint16_t address = 0x40;
-10:31:15.172 -> uint16_t command = 0x1B;
-10:31:15.172 -> uint32_t rawData = 0xE41BBF40;
-
-//Codigo de envio para bajar canal
-10:35:35.985 -> uint16_t address = 0x7;
-10:35:35.985 -> uint16_t command = 0xFD;
-10:35:35.985 -> uint32_t rawData = 0x2FDF807;
-
-//Codigo recibido para bajar canal
-10:31:43.594 -> uint16_t address = 0x40;
-10:31:43.594 -> uint16_t command = 0x1F;
-10:31:43.594 -> uint32_t rawData = 0xE01FBF40;
-
-//Codigo de envio para mute
-11:13:46.560 -> uint16_t address = 0xF7;
-11:13:46.560 -> uint16_t command = 0xFD;
-11:13:46.560 -> uint32_t rawData = 0x2FD08F7;
-
-//Codigo recibido para mute
-11:12:16.121 -> uint16_t address = 0x40;
-11:12:16.121 -> uint16_t command = 0x10;
-11:12:16.121 -> uint32_t rawData = 0xEF10BF40;
+// Spectra
+powerCode = 0x2FD48B7; // Código IR para encender/apagar
+volumeUpCode = 0x2FD58A7; // Código IR para subir volumen
+volumeDownCode = 0x2FD7887; // Código IR para bajar volumen
+channelUpCode = 0x2FDD827; // Código IR para subir canal
+channelDownCode = 0x2FDF807; // Código IR para bajar canal
+muteCode = 0x2FD08F7; // Código IR para silenciar
+sourceCode = 0x2FD28D7; // Código IR para home
+upCode = 0x2FD9867; // Código IR para arriba
+downCode = 0x2FDB847; // Código IR para abajo
+leftCode = 0x2FD629D; // Código IR para izquierda
+rightCode = 0x2FDE21D; // Código IR para derecha
+okCode = 0x2FD50AF; // Código IR para ok
+backCode = 0x2FDFF00; // Código IR para regresar
+playPauseCode = 0x2FDEA15; // Código IR para play/pause
+exitCode = 0x2FD22DD; // Código IR para salir
+menuCode = 0x2FDDA25; // Código IR para menú
+netflixCode = 0xBB44BF40; // Código IR para Netflix
+disneyCode = 0x3A00; // Código IR para Disney+
