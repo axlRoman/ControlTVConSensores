@@ -69,7 +69,7 @@ IRsend irsend(IR_LED_PIN);
 
 // Códigos IR genéricos comunes
 //Spectra
-unsigned long powerCode = 0x2FD48B7; // Código IR para encender/apagar
+unsigned long powerCode = 0xBB44BF40; // Código IR para encender/apagar
 unsigned long volumeUpCode = 0x2FD58A7; // Código IR para subir volumen
 unsigned long volumeDownCode = 0x2FD7887; // Código IR para bajar volumen
 unsigned long channelUpCode = 0x2FDD827; // Código IR para subir canal
@@ -88,7 +88,7 @@ unsigned long playPauseCode = 0x2FDEA15 ; // Código IR para play/pause
 
 unsigned long exitCode = 0x2FD22DD  ;
 
-unsigned long netflixCode = 0x6A00; // Código IR para Netflix
+unsigned long menuCode = 0x2FDDA25    ; // Código IR para Netflix
 unsigned long disneyCode = 0x3A00 ; // Código IR para Disney+
 
 
@@ -99,7 +99,7 @@ unsigned long disneyCode = 0x3A00 ; // Código IR para Disney+
 //
 void setup() {
   // Inicializar el puerto serie
-  Serial1.begin(9600);
+//  Serial1.begin(9600);
   pinMode(ledPin, OUTPUT); // Configura el pin como salida
     pinMode(LED_BUILTIN, OUTPUT);
 
@@ -172,7 +172,7 @@ void loop() {
         irsend.sendNEC(playPauseCode, 32);
         break;
       case 'n':
-        irsend.sendNEC(netflixCode, 32);
+        irsend.sendNEC(menuCode, 32);
         break;
       case 'i':
         irsend.sendNEC(disneyCode, 32);

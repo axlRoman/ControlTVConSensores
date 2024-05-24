@@ -15,13 +15,15 @@ int isr_flag = 0;
 #define LED_PIN 2
 const int power = 4;
 
+const int menu = 22;
+
 const int channelUp = 5;
 const int channelDown = 6;
 
 const int up = 8;
 const int down = 7;
 
-const int source = 12;
+const int source = 26;
 const int ok = 11;
 
 const int rigth = 15;
@@ -29,7 +31,9 @@ const int left = 0;
 
 const int play = 17;
 
-const int ret = 19;
+//const int ret = 19;
+
+const int exitPort = 19;
 
 const int mute = 13; // Define el pin al que está conectado el LED IR
 const int trigPin = 9; // Pin del trig para el sensor ultrasónico
@@ -57,7 +61,10 @@ unsigned long playPauseCode = 0x2FDEA15 ; // Código IR para play/pause
 
 unsigned long exitCode = 0x2FD22DD  ;
 
-unsigned long netflixCode = 0x6A00; // Código IR para Netflix
+
+unsigned long menuCode = 0x2FDDA25    ;
+
+unsigned long netflixCode = 0xBB44BF40; // Código IR para Netflix
 unsigned long disneyCode = 0x3A00 ; // Código IR para Disney+
 
 void interruptRoutine() {
@@ -84,10 +91,12 @@ void setup() {
   pinMode(rigth, INPUT_PULLUP); // Configura el pin right con resistencia pull-up
   pinMode(left, INPUT_PULLUP); // Configura el pin left con resistencia pull-up
 
-  pinMode(ret, INPUT_PULLUP); // Configura el pin return con resistencia pull-up
+  pinMode(exit, INPUT_PULLUP); // Configura el pin return con resistencia pull-up
   pinMode(play, INPUT_PULLUP); // Configura el pin play con resistencia pull-up
 
- // pinMode(up, INPUT_PULLUP); // Configura el pin up con resistencia pull-up
+  pinMode(mute, INPUT_PULLUP); // Configura el pin play con resistencia pull-up
+
+  //pinMode(exit, INPUT_PULLUP); // Configura el pin up con resistencia pull-up
  // pinMode(down, INPUT_PULLUP); // Configura el pin down con resistencia pull-up
 }
 
@@ -130,6 +139,7 @@ void loop() {
     delay(50);
     encender();
   }
+  
   int sensorOk = digitalRead(ok);
   if(sensorOk == LOW){
     irsend.sendNEC(okCode, 32);
@@ -177,10 +187,25 @@ void loop() {
     delay(50);
     encender();
   }
-
+/*
   int sensorReturn = digitalRead(ret);
   if(sensorReturn == LOW){
     irsend.sendNEC(backCode, 32);
+    delay(50);
+    encender();
+  }
+*/
+
+  int sensorMenu = digitalRead(menu);
+  if(sensorMenu == LOW){
+    irsend.sendNEC(menuCode, 32);
+    delay(50);
+    encender();
+  }
+
+  int sensorExit = digitalRead(exitPort);
+  if(sensorExit == LOW){
+    irsend.sendNEC(exitCode, 32);
     delay(50);
     encender();
   }
