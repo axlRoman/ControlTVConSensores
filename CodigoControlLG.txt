@@ -1,0 +1,19 @@
+// LG
+powerCode = 0x20DF10EF  ; // Código IR para encender/apagar
+volumeUpCode = 0x20DF40BF   ; // Código IR para subir volumen
+volumeDownCode =   0x20DFC03F ; // Código IR para bajar volumen
+channelUpCode = 0x20DF00FF ; // Código IR para subir canal
+channelDownCode = 0x20DF807F  ; // Código IR para bajar canal
+muteCode =  0x20DF906F  ; // Código IR para silenciar
+sourceCode = 0x20DF3EC1  ; // Código IR para home
+upCode =  0x20DF02FD ; // Código IR para arriba
+downCode = 0x20DF827D ; // Código IR para abajo
+leftCode = 0x20DFE01F ; // Código IR para izquierda
+rightCode = 0x20DF609F ; // Código IR para derecha
+okCode = 0x20DF22DD ; // Código IR para ok
+backCode = 0x20DF14EB ; // Código IR para regresar
+playPauseCode = 0x20DF0DF2 ; // Código IR para play/pause
+exitCode = 0x20DFDA25  ; // Código IR para salir
+menuCode = 0x20DFC23D ; // Código IR para menú
+netflixCode = 0x20DF6A95  ; // Código IR para Netflix
+disneyCode = 0x20DF3AC5  ; // Código IR para Disney+

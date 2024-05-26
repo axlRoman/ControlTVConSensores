@@ -15,5 +15,3 @@ backCode = 0x2FDFF00; // Código IR para regresar
 playPauseCode = 0x2FDEA15; // Código IR para play/pause
 exitCode = 0x2FD22DD; // Código IR para salir
 menuCode = 0x2FDDA25; // Código IR para menú
-netflixCode = 0xBB44BF40; // Código IR para Netflix
-disneyCode = 0x3A00; // Código IR para Disney+

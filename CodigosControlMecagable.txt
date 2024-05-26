@@ -1,0 +1,19 @@
+// MegaCable
+powerCode = 0xCD323BC4 ; // Código IR para encender/apagar
+volumeUpCode = 0xCD3201FE  ; // Código IR para subir volumen
+volumeDownCode = 0xCD32817E  ; // Código IR para bajar volumen
+channelUpCode = 0xCD32A15E ; // Código IR para subir canal
+channelDownCode = 0xCD32619E ; // Código IR para bajar canal
+muteCode = 0xCD3239C6  ; // Código IR para silenciar
+sourceCode = 0xE0E0807F ; // Código IR para home
+upCode = 0xCD3253AC  ; // Código IR para arriba
+downCode = 0xCD324BB4 ; // Código IR para abajo
+leftCode = 0xCD329966 ; // Código IR para izquierda
+rightCode = 0xCD32837C ; // Código IR para derecha
+okCode = 0xCD32738C ; // Código IR para ok
+backCode = ; // Código IR para regresar
+playPauseCode = 0xCD32A956 ; // Código IR para play/pause
+exitCode = 0xCD32A35C ; // Código IR para salir
+menuCode = 0xCD3211EE ; // Código IR para menú
+netflixCode = ; // Código IR para Netflix
+disneyCode = ; // Código IR para Disney+
