@@ -2,6 +2,8 @@
 [![MimoTV](https://i.postimg.cc/vmQ5Wp8W/MimoTV.jpg)](https://github.com/axlRoman/ControlTVConSensores/)
 
 ## Resumen
+[![VideoMimoTV](https://img.youtube.com/vi/ngGnWXy2fA8/0.jpg)](https://youtu.be/ngGnWXy2fA8)
+
 La motivación principal para este proyecto fue que un integrante de nuestro equipo tiene un familiar que tenía dificultades al momento de interactuar con un control remoto. Este familiar encontraba el control remoto impreciso y a menudo presionaba teclas no deseadas, lo cual dificulta su uso. Por lo tanto, este proyecto comenzó principalmente para abordar esa problemática.
 
 Además, se identificó que en el entorno hospitalario, los pacientes a menudo enfrentan desafíos similares al intentar utilizar controles remotos. Muchos pacientes tienen movilidad limitada o falta de destreza en las manos, lo que hace que el uso de un control remoto tradicional sea complicado y frustrante. Este problema puede afectar negativamente su bienestar, ya que no pueden acceder de manera fácil a opciones de entretenimiento o comunicación que les permitan sentirse más cómodos y conectados durante su estancia en el hospital.
