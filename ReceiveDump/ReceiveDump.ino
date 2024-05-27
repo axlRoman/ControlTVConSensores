@@ -1,7 +1,7 @@
 #include <Arduino.h>
 #include <IRremote.hpp>
 
-#define IR_RECEIVE_PIN 11  // Pin para el receptor IR
+#define IR_RECEIVE_PIN 2  // Pin para el receptor IR
 #define IR_SEND_PIN 3      // Pin para el emisor IR
 
 void setup() {
