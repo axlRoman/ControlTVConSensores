@@ -2,7 +2,13 @@
 [![MimoTV](https://i.postimg.cc/vmQ5Wp8W/MimoTV.jpg)](https://github.com/axlRoman/ControlTVConSensores/)
 
 ## Resumen
-[![VideoMimoTV](https://img.youtube.com/vi/ngGnWXy2fA8/0.jpg)](https://youtu.be/ngGnWXy2fA8)
+### Video de resultados
+<p align="center">
+  <a href="https://youtu.be/ngGnWXy2fA8">
+    <img src="https://img.youtube.com/vi/ngGnWXy2fA8/0.jpg" alt="VideoMimoTV" style="width:100%;">
+  </a>
+</p>
+
 
 La motivación principal para este proyecto fue que un integrante de nuestro equipo tiene un familiar que tenía dificultades al momento de interactuar con un control remoto. Este familiar encontraba el control remoto impreciso y a menudo presionaba teclas no deseadas, lo cual dificulta su uso. Por lo tanto, este proyecto comenzó principalmente para abordar esa problemática.
 
