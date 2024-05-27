@@ -1,5 +1,5 @@
 # [MimoTV](https://github.com/axlRoman/ControlTVConSensores/)
-[![MimoTV](https://i.postimg.cc/hP8VYS5k/IMG20240526210420.jpg)](https://github.com/axlRoman/ControlTVConSensores/)
+[![MimoTV](https://i.postimg.cc/vmQ5Wp8W/MimoTV.jpg)](https://github.com/axlRoman/ControlTVConSensores/)
 
 ## Resumen
 La motivación principal para este proyecto fue que un integrante de nuestro equipo tiene un familiar que tenía dificultades al momento de interactuar con un control remoto. Este familiar encontraba el control remoto impreciso y a menudo presionaba teclas no deseadas, lo cual dificulta su uso. Por lo tanto, este proyecto comenzó principalmente para abordar esa problemática.
@@ -21,6 +21,8 @@ Este proyecto utiliza un microcontrolador Arduino para crear un control remoto u
 - Resistencias (220Ω) y cables de conexión
 
 ## Descripción de Pines
+[![CircuitoLogicoMimoTV](https://i.postimg.cc/W4M0rsPp/Circuito-Logico-Mimo-TV.jpg)](https://github.com/axlRoman/ControlTVConSensores/)
+
 
 
 - `IR_LED_PIN`: Pin 3 (LED IR)
@@ -107,6 +109,91 @@ Enciende un LED indicador durante 500 ms para proporcionar retroalimentación vi
 ### Sensores Infrarrojos
 
 Los sensores infrarrojos detectan la proximidad de objetos y activa funcionalidades adicionales. Como encender o apagar el televisor, cambiar de canales, las flechas de desplazamiento, play y pausa, source, ok, exit y menu
+
+# [Receptor y Emisor de Señales IR con Arduino](https://github.com/axlRoman/ControlTVConSensores/blob/main/ReceiveDump/ReceiveDump.ino)
+
+Este proyecto utiliza un microcontrolador Arduino para recibir señales IR (infrarrojas) y retransmitirlas. Utiliza la librería `IRremote` para gestionar tanto el receptor como el emisor de señales IR.
+
+## Componentes Necesarios
+
+- Arduino (uno compatible)
+- Receptor IR (como el TSOP4838)
+- Emisor IR (LED IR)
+- Resistencias (220Ω) y cables de conexión
+
+## Descripción de Pines
+[![CircuitoLogicoReceptorEmisorSeñalIR](https://i.postimg.cc/HLH96rz8/Circuito-Logico-Receptor-YEmisor-De-Se-al.jpg)](https://github.com/axlRoman/ControlTVConSensores/)
+
+- `IR_RECEIVE_PIN`: Pin 2 (Receptor IR)
+- `IR_SEND_PIN`: Pin 3 (Emisor IR)
+- `LED_BUILTIN`: LED integrado en la placa Arduino
+
+## Instalación
+
+1. Conecta los componentes según la asignación de pines.
+2. Instala la librería `IRremote` en el IDE de Arduino. Puedes instalarla desde el Administrador de Librerías buscando "IRremote".
+3. Sube el código proporcionado al Arduino.
+
+## Código
+
+```cpp
+#include <Arduino.h>
+#include <IRremote.hpp>
+
+#define IR_RECEIVE_PIN 2  // Pin para el receptor IR
+#define IR_SEND_PIN 3      // Pin para el emisor IR
+
+void setup() {
+    Serial.begin(115200); // Inicializa la comunicación serie
+    pinMode(LED_BUILTIN, OUTPUT);
+    
+    Serial.println(F("Iniciando receptor IR..."));
+    IrReceiver.begin(IR_RECEIVE_PIN, ENABLE_LED_FEEDBACK); // Inicializa el receptor IR
+    
+    Serial.println(F("Listo para recibir señales IR."));
+}
+
+void loop() {
+    if (IrReceiver.decode()) {  // Captura una señal IR
+        // Imprime los resultados de la señal recibida
+        Serial.println();
+        Serial.println(F("Señal recibida:"));
+        IrReceiver.printIRResultShort(&Serial);
+
+        // Retransmite la señal recibida
+        if (IrReceiver.decodedIRData.protocol != UNKNOWN) {
+            Serial.println(F("Retransmitiendo señal..."));
+            IrSender.sendIRResultRaw(&IrReceiver.decodedIRData.rawData); // Enviar la señal IR recibida
+            
+            // Imprime la señal que se retransmitió
+            Serial.println(F("Señal retransmitida:"));
+            IrReceiver.printIRResultShort(&Serial);
+        } else {
+            Serial.println(F("Protocolo desconocido, no se retransmitirá."));
+        }
+
+        IrReceiver.resume(); // Prepara para la siguiente señal IR
+    }
+}
+```
+## Funcionamiento
+### Configuración Inicial
+En la función `setup()`, se inicializa la comunicación serie y se configura el receptor IR en el pin especificado.
+
+### Bucle Principal
+En la función `loop()`, se detecta si se ha recibido una señal IR. Si se recibe una señal:
+
+Se imprime la señal recibida en el monitor serie.
+Si el protocolo de la señal es conocido, se retransmite la señal utilizando el emisor IR.
+
+Se imprime la señal retransmitida en el monitor serie.
+Si el protocolo es desconocido, se notifica que no se retransmitirá.
+
+### Funciones Principales
+- `IrReceiver.decode()`: Captura una señal IR recibida.
+- `IrReceiver.printIRResultShort(&Serial)`: Imprime los detalles de la señal recibida.
+- `IrSender.sendIRResultRaw(&IrReceiver.decodedIRData.rawData)`: Retransmite la señal IR recibida.
+- `IrReceiver.resume()`: Prepara el receptor para la próxima señal IR.
 
 ## Contribución
 
